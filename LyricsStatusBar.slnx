@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="src/LyricsStatusBar.Core/LyricsStatusBar.Core.csproj" />
+  <Project Path="src/LyricsStatusBar.App/LyricsStatusBar.App.csproj" />
+  <Project Path="tests/LyricsStatusBar.Tests/LyricsStatusBar.Tests.csproj" />
+</Solution>

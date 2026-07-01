@@ -1,0 +1,18 @@
+{
+  "manifest_version": 1,
+  "type": "extension",
+  "name": "Lyrics StatusBar Bridge",
+  "slug": "lyrics_statusbar_bridge",
+  "description": "Sends NetEase Cloud Music lyric and playback events to Lyrics StatusBar.",
+  "version": "1.1.0",
+  "betterncm_version": ">=1.0.0",
+  "author": "Lyrics StatusBar",
+  "injects": {
+    "Main": [
+      {
+        "file": "plugin.js"
+      }
+    ]
+  },
+  "native_plugin": "native.dll"
+}

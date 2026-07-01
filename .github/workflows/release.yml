@@ -1,0 +1,96 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - v*
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+jobs:
+  build-release:
+    runs-on: windows-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Build application and x86 bridge
+        shell: pwsh
+        run: |
+          $vsWhere = Join-Path ([Environment]::GetFolderPath([Environment+SpecialFolder]::ProgramFilesX86)) 'Microsoft Visual Studio\Installer\vswhere.exe'
+          $vsPath = & $vsWhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+          Import-Module (Join-Path $vsPath 'Common7\Tools\Microsoft.VisualStudio.DevShell.dll')
+          Enter-VsDevShell -VsInstallPath $vsPath -SkipAutomaticLocation -DevCmdArguments '-arch=x86 -host_arch=x64'
+          .\scripts\build.ps1
+
+      - name: Authenticode-sign application when certificate secrets exist
+        shell: pwsh
+        env:
+          WINDOWS_SIGNING_CERTIFICATE_BASE64: ${{ secrets.WINDOWS_SIGNING_CERTIFICATE_BASE64 }}
+          WINDOWS_SIGNING_CERTIFICATE_PASSWORD: ${{ secrets.WINDOWS_SIGNING_CERTIFICATE_PASSWORD }}
+        run: .\scripts\sign.ps1 -Files .\artifacts\app\LyricsStatusBar.exe
+
+      - name: Install Inno Setup and create packages
+        shell: pwsh
+        run: |
+          $programFilesX86 = [Environment]::GetFolderPath([Environment+SpecialFolder]::ProgramFilesX86)
+          $env:ISCC_EXE = Join-Path $programFilesX86 'Inno Setup 6\ISCC.exe'
+          if (-not (Test-Path -LiteralPath $env:ISCC_EXE)) {
+            choco install innosetup --no-progress -y
+          }
+          .\scripts\package.ps1 -SkipBuild
+
+      - name: Authenticode-sign installer when certificate secrets exist
+        shell: pwsh
+        env:
+          WINDOWS_SIGNING_CERTIFICATE_BASE64: ${{ secrets.WINDOWS_SIGNING_CERTIFICATE_BASE64 }}
+          WINDOWS_SIGNING_CERTIFICATE_PASSWORD: ${{ secrets.WINDOWS_SIGNING_CERTIFICATE_PASSWORD }}
+        run: .\scripts\sign.ps1 -Files '.\artifacts\installer\网易云任务栏歌词-Win11-x64-Setup.exe'
+
+      - name: Create SHA-256 checksums
+        shell: pwsh
+        run: |
+          $assets = @(
+            '.\artifacts\installer\网易云任务栏歌词-Win11-x64-Setup.exe',
+            '.\artifacts\LyricsStatusBar-Win11-x64-portable.zip',
+            '.\artifacts\LyricsStatusBarBridge.plugin'
+          )
+          $lines = foreach ($asset in $assets) {
+            $hash = (Get-FileHash -LiteralPath $asset -Algorithm SHA256).Hash.ToLowerInvariant()
+            $name = Split-Path -Leaf $asset
+            "$hash  $name"
+          }
+          [IO.File]::WriteAllLines((Join-Path (Get-Location) 'artifacts\SHA256SUMS.txt'), $lines)
+
+      - name: Attest release build provenance
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: |
+            artifacts/installer/网易云任务栏歌词-Win11-x64-Setup.exe
+            artifacts/LyricsStatusBar-Win11-x64-portable.zip
+            artifacts/LyricsStatusBarBridge.plugin
+
+      - name: Publish GitHub Release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $arguments = @(
+            'release', 'create', $env:GITHUB_REF_NAME,
+            '.\artifacts\installer\网易云任务栏歌词-Win11-x64-Setup.exe',
+            '.\artifacts\LyricsStatusBar-Win11-x64-portable.zip',
+            '.\artifacts\LyricsStatusBarBridge.plugin',
+            '.\artifacts\SHA256SUMS.txt',
+            '--verify-tag',
+            '--generate-notes',
+            '--title', "网易云任务栏歌词 $env:GITHUB_REF_NAME"
+          )
+          & gh @arguments

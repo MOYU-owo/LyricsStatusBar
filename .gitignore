@@ -1,0 +1,11 @@
+artifacts/
+tools/
+%SystemDrive%/
+**/bin/
+**/obj/
+*.user
+*.suo
+*.pfx
+*.p12
+*.cer
+*.snk

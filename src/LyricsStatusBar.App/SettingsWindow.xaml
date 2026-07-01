@@ -1,0 +1,66 @@
+<Window x:Class="LyricsStatusBar.App.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Lyrics StatusBar Settings"
+        Width="470"
+        Height="610"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+  <Grid Margin="22">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="155" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="42" />
+          <RowDefinition Height="42" />
+          <RowDefinition Height="42" />
+          <RowDefinition Height="42" />
+          <RowDefinition Height="42" />
+          <RowDefinition Height="42" />
+          <RowDefinition Height="42" />
+          <RowDefinition Height="42" />
+          <RowDefinition Height="42" />
+          <RowDefinition Height="42" />
+          <RowDefinition Height="42" />
+          <RowDefinition Height="42" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Font family" VerticalAlignment="Center" />
+        <TextBox x:Name="FontFamilyBox" Grid.Row="0" Grid.Column="1" Margin="0,6" />
+        <TextBlock Grid.Row="1" Text="Primary font size" VerticalAlignment="Center" />
+        <TextBox x:Name="PrimarySizeBox" Grid.Row="1" Grid.Column="1" Margin="0,6" />
+        <TextBlock Grid.Row="2" Text="Translation font size" VerticalAlignment="Center" />
+        <TextBox x:Name="SecondarySizeBox" Grid.Row="2" Grid.Column="1" Margin="0,6" />
+        <TextBlock Grid.Row="3" Text="Primary color" VerticalAlignment="Center" />
+        <TextBox x:Name="PrimaryColorBox" Grid.Row="3" Grid.Column="1" Margin="0,6" ToolTip="#AARRGGBB" />
+        <TextBlock Grid.Row="4" Text="Translation color" VerticalAlignment="Center" />
+        <TextBox x:Name="SecondaryColorBox" Grid.Row="4" Grid.Column="1" Margin="0,6" ToolTip="#AARRGGBB" />
+        <TextBlock Grid.Row="5" Text="Shadow color" VerticalAlignment="Center" />
+        <TextBox x:Name="ShadowColorBox" Grid.Row="5" Grid.Column="1" Margin="0,6" ToolTip="#AARRGGBB" />
+        <TextBlock Grid.Row="6" Text="Text alignment" VerticalAlignment="Center" />
+        <ComboBox x:Name="AlignmentBox" Grid.Row="6" Grid.Column="1" Margin="0,6" />
+        <TextBlock Grid.Row="7" Text="Maximum width (px)" VerticalAlignment="Center" />
+        <TextBox x:Name="MaxWidthBox" Grid.Row="7" Grid.Column="1" Margin="0,6" />
+        <TextBlock Grid.Row="8" Text="Horizontal offset (px)" VerticalAlignment="Center" />
+        <TextBox x:Name="OffsetBox" Grid.Row="8" Grid.Column="1" Margin="0,6" />
+        <TextBlock Grid.Row="9" Text="Lyric advance (ms)" VerticalAlignment="Center" />
+        <TextBox x:Name="LyricAdvanceBox" Grid.Row="9" Grid.Column="1" Margin="0,6" ToolTip="Positive values show lyrics earlier. Use 300-800 if lyrics feel late." />
+        <TextBlock Grid.Row="10" Text="Hide delay (ms)" VerticalAlignment="Center" />
+        <TextBox x:Name="HideDelayBox" Grid.Row="10" Grid.Column="1" Margin="0,6" />
+        <TextBlock Grid.Row="11" Text="Start with Windows" VerticalAlignment="Center" />
+        <CheckBox x:Name="AutoStartBox" Grid.Row="11" Grid.Column="1" VerticalAlignment="Center" />
+      </Grid>
+    </ScrollViewer>
+    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+      <Button Content="Defaults" Width="90" Margin="0,0,10,0" Click="ResetClicked" />
+      <Button Content="Cancel" Width="80" Margin="0,0,10,0" IsCancel="True" />
+      <Button Content="Save" Width="80" IsDefault="True" Click="SaveClicked" />
+    </StackPanel>
+  </Grid>
+</Window>
