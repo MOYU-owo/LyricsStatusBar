@@ -9,7 +9,13 @@
     <AssemblyName>LyricsStatusBar</AssemblyName>
     <RootNamespace>LyricsStatusBar.App</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <Version>1.1.1</Version>
+    <ApplicationIcon>..\..\assets\LyricsStatusBar.ico</ApplicationIcon>
+    <Product>网易云任务栏歌词</Product>
+    <Description>在 Windows 11 任务栏显示网易云音乐同步歌词</Description>
+    <Company>MOYU-owo</Company>
+    <Authors>MOYU-owo</Authors>
+    <Copyright>Copyright © 2026 MOYU-owo</Copyright>
+    <Version>1.1.2</Version>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\LyricsStatusBar.Core\LyricsStatusBar.Core.csproj" />

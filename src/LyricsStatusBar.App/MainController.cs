@@ -20,6 +20,8 @@ internal sealed class MainController : IDisposable
     private readonly Forms.ToolStripMenuItem _autoStartItem = new("\u5f00\u673a\u542f\u52a8");
     private readonly Queue<string> _hideRecords = new();
 
+    private Icon? _applicationIcon;
+
     private OverlayWindow? _overlay;
     private AppSettings _settings = new();
     private TrackData? _track;
@@ -115,7 +117,12 @@ internal sealed class MainController : IDisposable
             new Forms.ToolStripSeparator(),
             exitItem
         ]);
-        _trayIcon.Icon = SystemIcons.Information;
+        var processPath = Environment.ProcessPath;
+        if (!string.IsNullOrWhiteSpace(processPath))
+        {
+            _applicationIcon = Icon.ExtractAssociatedIcon(processPath);
+        }
+        _trayIcon.Icon = _applicationIcon ?? SystemIcons.Application;
         _trayIcon.Text = ProductName;
         _trayIcon.ContextMenuStrip = menu;
         _trayIcon.Visible = true;
@@ -315,6 +322,7 @@ internal sealed class MainController : IDisposable
         _fileBridge.Dispose();
         _trayIcon.Visible = false;
         _trayIcon.Dispose();
+        _applicationIcon?.Dispose();
         _overlay?.Close();
     }
 }
