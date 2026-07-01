@@ -9,7 +9,7 @@
     <AssemblyName>LyricsStatusBar</AssemblyName>
     <RootNamespace>LyricsStatusBar.App</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\LyricsStatusBar.Core\LyricsStatusBar.Core.csproj" />

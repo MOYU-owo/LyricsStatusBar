@@ -4,7 +4,7 @@
 
 ## 最简单的安装方法
 
-运行“网易云任务栏歌词-Win11-x64-Setup.exe”：
+运行“LyricsStatusBar-Win11-x64-Setup.exe”：
 
 - 已安装 BetterNCM：安装程序会自动识别数据目录并部署桥接插件。
 - 尚未安装 BetterNCM：可以先完成本工具安装；安装 BetterNCM 后，本工具会在启动时自动检测并补装插件。

@@ -1,5 +1,5 @@
 ﻿#define AppName "网易云任务栏歌词"
-#define AppVersion "1.1.0"
+#define AppVersion "1.1.1"
 #define AppPublisher "Lyrics StatusBar"
 #define AppExeName "LyricsStatusBar.exe"
 
@@ -12,7 +12,7 @@ DefaultDirName={localappdata}\Programs\LyricsStatusBar
 DefaultGroupName={#AppName}
 PrivilegesRequired=lowest
 OutputDir=..\artifacts\installer
-OutputBaseFilename=网易云任务栏歌词-Win11-x64-Setup
+OutputBaseFilename=LyricsStatusBar-Win11-x64-Setup
 Compression=lzma2
 SolidCompression=yes
 WizardStyle=modern
