@@ -53,14 +53,14 @@ jobs:
         env:
           WINDOWS_SIGNING_CERTIFICATE_BASE64: ${{ secrets.WINDOWS_SIGNING_CERTIFICATE_BASE64 }}
           WINDOWS_SIGNING_CERTIFICATE_PASSWORD: ${{ secrets.WINDOWS_SIGNING_CERTIFICATE_PASSWORD }}
-        run: .\scripts\sign.ps1 -Files '.\artifacts\installer\LyricsStatusBar-Win11-x64-Setup.exe'
+        run: .\scripts\sign.ps1 -Files '.\artifacts\installer\LyricsStatusBar-Windows-x64-Setup.exe'
 
       - name: Create SHA-256 checksums
         shell: pwsh
         run: |
           $assets = @(
-            '.\artifacts\installer\LyricsStatusBar-Win11-x64-Setup.exe',
-            '.\artifacts\LyricsStatusBar-Win11-x64-portable.zip',
+            '.\artifacts\installer\LyricsStatusBar-Windows-x64-Setup.exe',
+            '.\artifacts\LyricsStatusBar-Windows-x64-portable.zip',
             '.\artifacts\LyricsStatusBarBridge.plugin'
           )
           $lines = foreach ($asset in $assets) {
@@ -74,8 +74,8 @@ jobs:
         uses: actions/attest-build-provenance@v2
         with:
           subject-path: |
-            artifacts/installer/LyricsStatusBar-Win11-x64-Setup.exe
-            artifacts/LyricsStatusBar-Win11-x64-portable.zip
+            artifacts/installer/LyricsStatusBar-Windows-x64-Setup.exe
+            artifacts/LyricsStatusBar-Windows-x64-portable.zip
             artifacts/LyricsStatusBarBridge.plugin
 
       - name: Publish GitHub Release
@@ -85,8 +85,8 @@ jobs:
         run: |
           $arguments = @(
             'release', 'create', $env:GITHUB_REF_NAME,
-            '.\artifacts\installer\LyricsStatusBar-Win11-x64-Setup.exe',
-            '.\artifacts\LyricsStatusBar-Win11-x64-portable.zip',
+            '.\artifacts\installer\LyricsStatusBar-Windows-x64-Setup.exe',
+            '.\artifacts\LyricsStatusBar-Windows-x64-portable.zip',
             '.\artifacts\LyricsStatusBarBridge.plugin',
             '.\artifacts\SHA256SUMS.txt',
             '--verify-tag',

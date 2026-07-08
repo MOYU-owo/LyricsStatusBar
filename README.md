@@ -1,18 +1,18 @@
 # 网易云任务栏歌词
 
-在 Windows 11 主任务栏空白区域显示网易云音乐同步歌词。程序使用独立的透明、置顶、鼠标穿透窗口，不修改或注入 Explorer。
+在 Windows 10/11 主任务栏空白区域显示网易云音乐同步歌词。程序使用独立的透明、置顶、鼠标穿透窗口，不修改或注入 Explorer。
 
 ## 下载与安装
 
-从 [Releases](https://github.com/MOYU-owo/LyricsStatusBar/releases/latest) 下载 LyricsStatusBar-Win11-x64-Setup.exe 并运行。
+从 [Releases](https://github.com/MOYU-owo/LyricsStatusBar/releases/latest) 下载 `LyricsStatusBar-Windows-x64-Setup.exe` 并运行。
 
 本工具需要 [BetterNCM](https://github.com/std-microblock/chromatic) 提供网易云音乐播放状态和歌词：
 
 - 已安装 BetterNCM：安装程序会自动识别数据目录并部署桥接插件。
-- 尚未安装 BetterNCM：可以先安装本工具；检测到 BetterNCM 后会自动补装桥接插件。
+- 尚未安装 BetterNCM：可以先安装本工具；以后检测到 BetterNCM 后，本工具会自动补装桥接插件。
 - 自动检测失败：右键通知区域中的本工具图标，选择“安装/修复 BetterNCM 桥接”。
 
-插件安装或更新后，需要彻底退出并重新打开网易云音乐。安装包为 Win11 x64 自包含版本，无需另外安装 .NET。
+插件安装或更新后，需要彻底退出并重新打开网易云音乐。安装包为 Windows x64 自包含版本，无需另外安装 .NET。
 
 ## 使用
 
@@ -27,28 +27,31 @@
 - 安装/修复 BetterNCM 桥接
 - 退出
 
-歌词快慢可在设置中的“Lyric advance (ms)”调整，正数表示歌词提前。
+歌词快慢可在设置中的 `Lyric advance (ms)` 调整，正数表示歌词提前。
 
 ## 兼容范围
 
+- Windows 10 1809 或更高版本 x64
 - Windows 11 x64
 - 网易云音乐 Windows 客户端 2.10.x–3.0.x
 - BetterNCM 1.x
-- 原生 Windows 11 任务栏
+- 原生 Windows 10/11 任务栏
 - 暴露标准任务栏窗口的 ExplorerPatcher 布局
 - 主显示器横向任务栏
 
 ## 构建
 
-需要 .NET 10 SDK、LLVM-MinGW x86 工具链和 Inno Setup 6：
+需要 .NET 10 SDK、LLVM-MinGW x86 工具链或 x86 MSVC 开发环境，以及 Inno Setup 6。
 
-    .\scripts\test.ps1
-    .\scripts\build.ps1
-    .\scripts\package.ps1
+```powershell
+.\scripts\test.ps1
+.\scripts\build.ps1
+.\scripts\package.ps1
+```
 
-构建产物位于 artifacts：
+构建产物位于 `artifacts`：
 
-- Win11 x64 自包含主程序
+- Windows x64 自包含主程序
 - x86 BetterNCM 原生桥接 DLL
 - BetterNCM 插件包
 - 便携 ZIP

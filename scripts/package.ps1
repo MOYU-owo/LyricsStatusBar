@@ -1,4 +1,4 @@
-﻿[CmdletBinding()]
+[CmdletBinding()]
 param([switch]$SkipBuild)
 
 $ErrorActionPreference = 'Stop'
@@ -11,7 +11,7 @@ if (-not $SkipBuild) {
 }
 
 $artifacts = Join-Path $root 'artifacts'
-$portableZip = Join-Path $artifacts 'LyricsStatusBar-Win11-x64-portable.zip'
+$portableZip = Join-Path $artifacts 'LyricsStatusBar-Windows-x64-portable.zip'
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 [IO.File]::Delete($portableZip)
 [IO.Compression.ZipFile]::CreateFromDirectory(

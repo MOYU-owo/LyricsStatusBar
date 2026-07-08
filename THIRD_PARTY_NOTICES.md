@@ -8,7 +8,7 @@ The optional BetterNCM installer is available under GPL-3.0 from:
 
 https://github.com/std-microblock/BetterNCM-Installer
 
-The Win11 x64 release is self-contained and redistributes the Microsoft .NET 10 runtime files under Microsoft's applicable license terms.
+The Windows x64 release is self-contained and redistributes the Microsoft .NET 10 runtime files under Microsoft's applicable license terms.
 
 LLVM-MinGW is used only as a build tool for the x86 bridge and is not redistributed in application artifacts:
 

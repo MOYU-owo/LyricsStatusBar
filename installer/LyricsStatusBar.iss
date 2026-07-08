@@ -1,5 +1,5 @@
-﻿#define AppName "网易云任务栏歌词"
-#define AppVersion "1.1.2"
+#define AppName "网易云任务栏歌词"
+#define AppVersion "1.2.0"
 #define AppPublisher "MOYU-owo"
 #define AppExeName "LyricsStatusBar.exe"
 
@@ -15,7 +15,7 @@ DefaultDirName={localappdata}\Programs\LyricsStatusBar
 DefaultGroupName={#AppName}
 PrivilegesRequired=lowest
 OutputDir=..\artifacts\installer
-OutputBaseFilename=LyricsStatusBar-Win11-x64-Setup
+OutputBaseFilename=LyricsStatusBar-Windows-x64-Setup
 SetupIconFile=..\assets\LyricsStatusBar.ico
 VersionInfoCompany={#AppPublisher}
 VersionInfoDescription={#AppName} 安装程序
@@ -26,7 +26,7 @@ SolidCompression=yes
 WizardStyle=modern
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
-MinVersion=10.0.22000
+MinVersion=10.0.17763
 UninstallDisplayName={#AppName}
 UninstallDisplayIcon={app}\{#AppExeName}
 CloseApplications=yes

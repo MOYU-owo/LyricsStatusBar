@@ -1,4 +1,4 @@
-﻿[CmdletBinding()]
+[CmdletBinding()]
 param([switch]$SkipNative)
 
 $ErrorActionPreference = 'Stop'
@@ -122,4 +122,4 @@ foreach ($document in @('README.md', 'LICENSE', 'THIRD_PARTY_NOTICES.md')) {
     Copy-Item -LiteralPath (Join-Path $root $document) -Destination (Join-Path $appOutput $document) -Force
 }
 
-Write-Host "Self-contained Win11 x64 build complete: $artifacts"
+Write-Host "Self-contained Windows x64 build complete: $artifacts"
