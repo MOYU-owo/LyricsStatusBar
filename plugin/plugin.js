@@ -1,7 +1,7 @@
 (() => {
   "use strict";
   const VERSION = 1;
-  const PLUGIN_VERSION = "1.2.0";
+  const PLUGIN_VERSION = "1.2.1";
   const TRACK_RESEND_MS = 5000;
   let currentTrackId = "";
   let currentTrack = null;

@@ -15,7 +15,7 @@ internal static class NativeMethods
     private const long WsExToolWindow = 0x00000080L;
     private const long WsExLayered = 0x00080000L;
     private const long WsExNoActivate = 0x08000000L;
-    private const uint MonitorDefaultToNearest = 2;
+    internal const uint MonitorDefaultToNearest = 2;
     private const int DwmwaCloaked = 14;
 
     internal delegate bool EnumWindowsProc(IntPtr window, IntPtr parameter);

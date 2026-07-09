@@ -4,7 +4,7 @@
   "name": "Lyrics StatusBar Bridge",
   "slug": "lyrics_statusbar_bridge",
   "description": "Sends NetEase Cloud Music lyric and playback events to Lyrics StatusBar.",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "betterncm_version": ">=1.0.0",
   "author": "MOYU-owo",
   "injects": {

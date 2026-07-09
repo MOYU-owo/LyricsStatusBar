@@ -1,5 +1,5 @@
 #define AppName "网易云任务栏歌词"
-#define AppVersion "1.2.0"
+#define AppVersion "1.2.1"
 #define AppPublisher "MOYU-owo"
 #define AppExeName "LyricsStatusBar.exe"
 

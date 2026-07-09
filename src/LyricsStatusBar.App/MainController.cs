@@ -202,9 +202,11 @@ internal sealed class MainController : IDisposable
         _lastTaskbar = taskbar;
         _overlay?.SetPlacement(taskbar.Placement);
         var stale = DateTimeOffset.UtcNow - _lastProgressAt > TimeSpan.FromMilliseconds(_settings.HideDelayMs);
-        if (!_settings.Enabled || (!_bridge.IsConnected && !_fileBridge.IsConnected) || stale || (_track is null && _lastLine.IsEmpty))
+        var bridgeConnected = _bridge.IsConnected || _fileBridge.IsConnected;
+        var shouldHide = !_settings.Enabled || !bridgeConnected || _track is null || _lastLine.IsEmpty;
+        if (shouldHide)
         {
-            HideLyrics($"timer_state enabled={_settings.Enabled} bridge={_bridge.IsConnected || _fileBridge.IsConnected} stale={stale} empty={_lastLine.IsEmpty} track={_track is not null}");
+            HideLyrics($"timer_state enabled={_settings.Enabled} bridge={bridgeConnected} stale={stale} empty={_lastLine.IsEmpty} track={_track is not null}");
         }
     }
 
@@ -288,7 +290,7 @@ internal sealed class MainController : IDisposable
     private void ShowDiagnostics()
     {
         var track = _track is null ? "None" : $"{_track.Title} - {_track.Artist} ({_track.Id})";
-        var taskbar = _lastTaskbar?.Description ?? "No usable area or fullscreen application";
+        var taskbar = _lastTaskbar?.Description ?? _taskbarLocator.LastFailure;
         var lastMessageAt = new[] { _bridge.LastMessageAt, _fileBridge.LastMessageAt }
             .Where(value => value is not null)
             .Max();

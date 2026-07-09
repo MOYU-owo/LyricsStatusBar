@@ -15,7 +15,7 @@
     <Company>MOYU-owo</Company>
     <Authors>MOYU-owo</Authors>
     <Copyright>Copyright © 2026 MOYU-owo</Copyright>
-    <Version>1.2.0</Version>
+    <Version>1.2.1</Version>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\LyricsStatusBar.Core\LyricsStatusBar.Core.csproj" />
